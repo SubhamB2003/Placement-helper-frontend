@@ -10,7 +10,7 @@ import UserWidget from '../../widgets/UserWidget';
 import Navbar from '../Navbar';
 
 
-function ProfilePage() {
+function ProfilePage({ newUser = false }) {
 
     const [user, setUser] = useState(null);
     const { userId } = useParams();

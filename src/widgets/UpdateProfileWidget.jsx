@@ -1,4 +1,4 @@
-import { Box, Button, FormLabel, TextField, useMediaQuery } from '@mui/material';
+import { Box, Button, FormControl, FormLabel, InputLabel, MenuItem, Select, TextField, Typography, useMediaQuery } from '@mui/material';
 import * as yup from "yup";
 import axios from 'axios';
 import { Formik } from 'formik';
@@ -16,7 +16,11 @@ const updatedSchema = yup.object().shape({
     location: yup.string().required("location required"),
     profession: yup.string().required("profession required"),
     gender: yup.string().required("gender required"),
-    about: yup.string()
+    about: yup.string(),
+    facebookId: yup.string(),
+    instagramId: yup.string(),
+    linkedinId: yup.string(),
+    GithubId: yup.string()
 })
 
 
@@ -36,7 +40,6 @@ function UpdateProfileWidget() {
         const formData = new FormData();
 
         if (values.picture) {
-            preview = URL.createObjectURL(values.picture);
             formData.append("picturePath", values.picture.name);
         }
 
@@ -44,11 +47,9 @@ function UpdateProfileWidget() {
             formData.append(value, values[value]);
         }
 
-        setTimeout(async () => {
-            const res = await axios.patch(`http://localhost:3030/user/${userId}`, formData);
-            dispatch(setUser({ user: res.data }));
-            navigate("/");
-        }, 2000)
+        const res = await axios.patch(`http://localhost:3030/user/${userId}`, formData);
+        dispatch(setUser({ user: res.data }));
+        navigate("/");
     }
 
 
@@ -64,7 +65,11 @@ function UpdateProfileWidget() {
                         gender: user.gender,
                         profession: user.profession,
                         location: user.location,
-                        about: user.about
+                        about: user.about,
+                        facebookId: user.facebookId,
+                        instagramId: user.instagramId,
+                        linkedinId: user.linkedinId,
+                        githubId: user.githubId
                     }}
                     validationSchema={updatedSchema}>
                     {({ values,
@@ -95,6 +100,13 @@ function UpdateProfileWidget() {
                                         }}
                                             width={100} height={100}
                                             src={preview} alt="user" />
+                                        <Typography textAlign="center" fontFamily="serif" sx={{ color: "green" }}>
+                                            {values.picture &&
+                                                <>
+                                                    <span style={{ display: "none" }}>{preview = URL.createObjectURL(values.picture)}</span>
+                                                    {"Successfully Changed Image"}
+                                                </>
+                                            }</Typography>
                                     </FormLabel>
                                 </Box>
                                 <TextField autoComplete='off' label="Username" name="userName"
@@ -109,12 +121,20 @@ function UpdateProfileWidget() {
                                     error={Boolean(touched.phoneNo) && Boolean(errors.phoneNo)}
                                     helperText={touched.phoneNo && errors.phoneNo}
                                     sx={{ gridColumn: "span 2" }} />
-                                <TextField autoComplete='off' label="Gender" name="gender"
-                                    onBlur={handleBlur} onChange={handleChange}
-                                    value={values.gender}
-                                    error={Boolean(touched.gender) && Boolean(errors.gender)}
-                                    helperText={touched.gender && errors.gender}
-                                    sx={{ gridColumn: "span 2" }} />
+                                <FormControl sx={{ gridColumn: "span 2" }}>
+                                    <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                                    <Select label="Gender"
+                                        labelId="demo-simple-select-label" id="demo-simple-select"
+                                        name="gender" onBlur={handleBlur} onChange={handleChange}
+                                        value={values.gender}
+                                        error={Boolean(touched.gender) && Boolean(errors.gender)}
+                                        helpertext={touched.gender && errors.gender}
+                                    >
+                                        <MenuItem value="Male">Male</MenuItem>
+                                        <MenuItem value="Female">Female</MenuItem>
+                                        <MenuItem value="Other">Others</MenuItem>
+                                    </Select>
+                                </FormControl>
                                 <TextField autoComplete='off' label="Profession" name="profession"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.profession}
@@ -132,6 +152,31 @@ function UpdateProfileWidget() {
                                     value={values.about}
                                     error={Boolean(touched.about) && Boolean(errors.about)}
                                     helperText={touched.about && errors.about}
+                                    sx={{ gridColumn: "span 2" }} />
+
+                                <TextField autoComplete='off' label="Facebook ID" name="facebookId"
+                                    onBlur={handleBlur} onChange={handleChange}
+                                    value={values.facebookId}
+                                    error={Boolean(touched.facebookId) && Boolean(errors.facebookId)}
+                                    helperText={touched.facebookId && errors.facebookId}
+                                    sx={{ gridColumn: "span 2" }} />
+                                <TextField autoComplete='off' label="Instagram ID" name="instagramId"
+                                    onBlur={handleBlur} onChange={handleChange}
+                                    value={values.instagramId}
+                                    error={Boolean(touched.instagramId) && Boolean(errors.instagramId)}
+                                    helperText={touched.instagramId && errors.instagramId}
+                                    sx={{ gridColumn: "span 2" }} />
+                                <TextField autoComplete='off' label="Linkedin ID" name="linkedinId"
+                                    onBlur={handleBlur} onChange={handleChange}
+                                    value={values.linkedinId}
+                                    error={Boolean(touched.linkedinId) && Boolean(errors.linkedinId)}
+                                    helperText={touched.linkedinId && errors.linkedinId}
+                                    sx={{ gridColumn: "span 2" }} />
+                                <TextField autoComplete='off' label="Github ID" name="githubId"
+                                    onBlur={handleBlur} onChange={handleChange}
+                                    value={values.githubId}
+                                    error={Boolean(touched.githubId) && Boolean(errors.githubId)}
+                                    helperText={touched.githubId && errors.githubId}
                                     sx={{ gridColumn: "span 2" }} />
                             </Box>
 

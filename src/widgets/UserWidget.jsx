@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import Flexbetween from '../components/Flexbetween';
 import WidgetWrapper from "../components/WidgetWrapper";
 import UserImage from "../components/UserImage";
-import { EmailOutlined, FemaleOutlined, InfoOutlined, LocationOnOutlined, MaleOutlined, ManageAccountsOutlined, PhoneAndroidOutlined, WorkOutlineOutlined } from '@mui/icons-material';
+import {
+    EmailOutlined, Facebook, FemaleOutlined, GitHub, InfoOutlined, Instagram, LinkedIn, LocationOnOutlined, MaleOutlined, ManageAccountsOutlined,
+    PhoneAndroidOutlined, TransgenderOutlined
+} from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 
 function UserWidget({ user }) {
-
+    console.log(user)
     const navigate = useNavigate();
     const userId = useSelector((state) => state.user._id);
 
@@ -26,7 +29,7 @@ function UserWidget({ user }) {
                     <UserImage image={user.picturePath} size={60} />
                     <Box>
                         <Typography variant='h4' fontWeight="500" fontFamily="serif">{name}</Typography>
-                        <Typography variant='h7' fontWeight="500" fontFamily="serif">{user.friends.length} friends</Typography>
+                        <Typography variant='h6' fontWeight="500" fontFamily="serif">{user.profession}</Typography>
                     </Box>
                 </Flexbetween>
                 {userId === user._id && (
@@ -59,22 +62,65 @@ function UserWidget({ user }) {
                     <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.location}</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-                    <WorkOutlineOutlined fontSize='medium' />
-                    <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.profession}</Typography>
+                    {user.gender.toUpperCase() === "MALE" ? <MaleOutlined fontSize='medium' />
+                        : user.gender.toUpperCase() === "FEMALE" ? <FemaleOutlined fontSize='medium' /> : <TransgenderOutlined fontSize='medium' />}
+                    <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.gender}</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap="1rem">
-                    {user.gender.toUpperCase() === "MALE" ? <MaleOutlined fontSize='medium' />
-                        : <FemaleOutlined fontSize='medium' />}
-                    <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.gender}</Typography>
+                    <InfoOutlined fontSize='medium' />
+                    <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.about}</Typography>
                 </Box>
             </Box>
 
             <Divider />
 
-            <Box p="1rem 0" display="flex" alignItems="center" gap="1rem">
-                <InfoOutlined fontSize='medium' />
-                <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.about}</Typography>
-            </Box>
+            <Flexbetween p="0.8rem 0.5rem">
+                <Box sx={{ cursor: "pointer" }}>
+                    <a href={user.facebookId} target="_blank" rel="noreferrer">
+                        <Facebook sx={{
+                            fontSize: "1.6rem",
+                            fill: "#000",
+                            "&:hover": {
+                                fill: "#2563eb"
+                            }
+                        }} />
+                    </a>
+                </Box>
+                <Box>
+                    <a href={user.instagramId} target="_blank" rel="noreferrer">
+                        <Instagram sx={{
+                            fontSize: "1.6rem",
+                            fill: "#000",
+                            "&:hover": {
+                                fill: "#9d174d"
+                            }
+                        }} />
+                    </a>
+                </Box>
+                <Box>
+                    <a href={user.linkedinId} target="_blank" rel="noreferrer">
+                        <LinkedIn sx={{
+                            fontSize: "1.6rem",
+                            fill: "#000",
+                            "&:hover": {
+                                fill: "#0891b2"
+                            }
+                        }} />
+                    </a>
+                </Box>
+                <Box>
+                    <a href={user.githubId} target="_blank" rel="noreferrer">
+                        <GitHub sx={{
+                            fontSize: "1.6rem",
+                            fill: "#000",
+                            "&:hover": {
+                                fill: "#000"
+                            }
+                        }} />
+                    </a>
+                </Box>
+            </Flexbetween>
+
         </WidgetWrapper>
     )
 }

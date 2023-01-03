@@ -52,6 +52,7 @@ function MyPostWidget() {
                     required
                     sx={{
                         width: "100%", padding: `${isNonMobile ? "0.8rem 2rem" : "0.4rem 1rem"}`,
+                        height: "3.5rem",
                         border: "1px solid gray",
                         borderRadius: "2rem", input: {
                             fontSize: "18px",

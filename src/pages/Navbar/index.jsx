@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout, setMode } from "../../state/index";
 import { useNavigate } from "react-router-dom";
-import { DarkMode, LightMode, Search } from "@mui/icons-material";
-import { Box, IconButton, InputBase, MenuItem, Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { DarkMode, LightMode, LogoutOutlined, SaveOutlined, Search } from "@mui/icons-material";
+import { Box, Divider, IconButton, InputBase, MenuItem, Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Flexbetween from "../../components/Flexbetween";
 import UserImage from '../../components/UserImage';
 
@@ -88,12 +88,19 @@ function Navbar() {
                                 vertical: 'top',
                             }}
                         >
-                            <MenuItem onClick={() => navigate(`/profile/${user._id}`)}>
-                                <Typography fontFamily="serif" fontSize="1.2rem">Profile</Typography>
-                            </MenuItem>
-                            <MenuItem onClick={() => dispatch(setLogout())}>
-                                <Typography fontFamily="serif" fontSize="1.2rem">Log Out</Typography>
-                            </MenuItem>
+                            <Box display="flex" padding="0.5rem" sx={{ cursor: "pointer" }}
+                                onClick={() => navigate(`/user/saveposts`)}>
+                                <Box display="flex" justifyContent="center" alignItems="center">
+                                    <SaveOutlined sx={{ fontSize: "18px" }} />
+                                </Box>
+                                <Typography fontFamily="serif" fontSize="1rem" paddingLeft="0.4rem">Save</Typography>
+                            </Box>
+                            <Divider />
+                            <Box display="flex" padding="0.5rem" sx={{ cursor: "pointer" }}
+                                onClick={() => dispatch(setLogout())}>
+                                <LogoutOutlined sx={{ fontSize: "18px" }} />
+                                <Typography fontFamily="serif" fontSize="0.9rem">Log Out</Typography>
+                            </Box>
                         </Box>
                     )}
                 </Box>

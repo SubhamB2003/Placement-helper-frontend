@@ -6,10 +6,10 @@ import Flexbetween from './Flexbetween';
 import UserImage from './UserImage';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { setPosts } from '../state';
+import { setPosts, setSavePosts } from '../state';
 
 
-function Friend({ friendId, name, createdAt, userPicturePath, postId, updatePostData, description }) {
+function Friend({ postUserId, name, createdAt, userPicturePath, postId, updatePostData, description }) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -28,13 +28,19 @@ function Friend({ friendId, name, createdAt, userPicturePath, postId, updatePost
         dispatch(setPosts({ posts }));
     }
 
+    const handleSavePost = async (postId) => {
+        const res = await axios.patch(`http://localhost:3030/users/${userId}/${postId}`);
+        console.log(res.data)
+        dispatch(setSavePosts(res.data))
+    }
+
 
     return (
         <Flexbetween>
             <Flexbetween gap="1rem" sx={{ cursor: "pointer" }}>
                 <UserImage image={userPicturePath} size={55} />
                 <Box onClick={() => {
-                    navigate(`/profile/${friendId}`);
+                    navigate(`/profile/${postUserId}`);
                     navigate(0);
                 }}>
                     <Typography color={main} fontFamily="serif" variant="h4">{name}</Typography>
@@ -56,7 +62,7 @@ function Friend({ friendId, name, createdAt, userPicturePath, postId, updatePost
                             vertical: 'top',
                         }}
                     >
-                        {friendId === userId && (
+                        {postUserId === userId && (
                             <>
                                 <Box display="flex" justifyItems="center" padding="0.5rem 0.6rem" sx={{ cursor: "pointer" }}
                                     onClick={() => updatePostData(postId, description)}>
@@ -73,9 +79,9 @@ function Friend({ friendId, name, createdAt, userPicturePath, postId, updatePost
                                 </Box>
                             </>
                         )}
-                        {friendId !== userId && (
+                        {postUserId !== userId && (
                             <Box display="flex" justifyItems="center" padding="0.6rem 0.8rem" sx={{ cursor: "pointer" }}
-                            >
+                                onClick={() => handleSavePost(postId)}>
                                 <SaveOutlined fontSize="small" sx={{ marginRight: "10px" }} />
                                 <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem">Save</Typography>
                             </Box>

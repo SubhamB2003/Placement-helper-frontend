@@ -11,6 +11,7 @@ import PostsWidget from "../../widgets/PostsWidget";
 function HomePage() {
 
     const user = useSelector((state) => state.user);
+    const userId = user._id;
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
     return (
@@ -26,7 +27,7 @@ function HomePage() {
                     mt={!isNonMobile && "2rem"}>
                     <MyPostWidget />
                     <Box m="2rem 0" />
-                    <PostsWidget userId={user._id} />
+                    <PostsWidget userId={userId} />
                 </Box>
                 {isNonMobile && (
                     <Box flexBasis={isNonMobile && "28%"}>

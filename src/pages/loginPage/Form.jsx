@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from "yup";
-import { Button, InputAdornment, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
@@ -27,7 +27,11 @@ const registerSchema = yup.object().shape({
     profession: yup.string().required("profession required"),
     gender: yup.string().required("gender required"),
     picture: yup.string().required("picture required"),
-    about: yup.string()
+    about: yup.string(),
+    facebookId: yup.string(),
+    instagramId: yup.string(),
+    linkedinId: yup.string(),
+    githubId: yup.string(),
 });
 
 
@@ -42,10 +46,14 @@ const initialRegisterValues = {
     password: "",
     phoneNo: "",
     profession: "",
-    gender: "",
+    gender: "Male",
     picture: "",
     location: "",
-    about: ""
+    about: "",
+    facebookId: "",
+    instagramId: "",
+    linkedinId: "",
+    githubId: ""
 };
 
 
@@ -150,12 +158,20 @@ function Form() {
                                     error={Boolean(touched.phoneNo) && Boolean(errors.phoneNo)}
                                     helperText={touched.phoneNo && errors.phoneNo}
                                     sx={{ gridColumn: "span 2" }} />
-                                <TextField autoComplete='off' label="Gender" name="gender"
-                                    onBlur={handleBlur} onChange={handleChange}
-                                    value={values.gender}
-                                    error={Boolean(touched.gender) && Boolean(errors.gender)}
-                                    helperText={touched.gender && errors.gender}
-                                    sx={{ gridColumn: "span 2" }} />
+                                <FormControl sx={{ gridColumn: "span 2" }}>
+                                    <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                                    <Select label="Gender"
+                                        labelId="demo-simple-select-label" id="demo-simple-select"
+                                        name="gender" onBlur={handleBlur} onChange={handleChange}
+                                        value={values.gender}
+                                        error={Boolean(touched.gender) && Boolean(errors.gender)}
+                                        helpertext={touched.gender && errors.gender}
+                                    >
+                                        <MenuItem value="Male">Male</MenuItem>
+                                        <MenuItem value="Female">Female</MenuItem>
+                                        <MenuItem value="Other">Others</MenuItem>
+                                    </Select>
+                                </FormControl>
                                 <TextField autoComplete='off' label="Profession" name="profession"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.profession}
@@ -209,6 +225,31 @@ function Form() {
                                     value={values.about}
                                     error={Boolean(touched.about) && Boolean(errors.about)}
                                     helperText={touched.about && errors.about}
+                                    sx={{ gridColumn: "span 2" }} />
+
+                                <TextField autoComplete='off' label="Facebook ID" name="facebookId"
+                                    onBlur={handleBlur} onChange={handleChange}
+                                    value={values.facebookId}
+                                    error={Boolean(touched.facebookId) && Boolean(errors.facebookId)}
+                                    helperText={touched.facebookId && errors.facebookId}
+                                    sx={{ gridColumn: "span 2" }} />
+                                <TextField autoComplete='off' label="Instagram ID" name="instagramId"
+                                    onBlur={handleBlur} onChange={handleChange}
+                                    value={values.instagramId}
+                                    error={Boolean(touched.instagramId) && Boolean(errors.instagramId)}
+                                    helperText={touched.instagramId && errors.instagramId}
+                                    sx={{ gridColumn: "span 2" }} />
+                                <TextField autoComplete='off' label="Linkedin ID" name="linkedinId"
+                                    onBlur={handleBlur} onChange={handleChange}
+                                    value={values.linkedinId}
+                                    error={Boolean(touched.linkedinId) && Boolean(errors.linkedinId)}
+                                    helperText={touched.linkedinId && errors.linkedinId}
+                                    sx={{ gridColumn: "span 2" }} />
+                                <TextField autoComplete='off' label="Github ID" name="githubId"
+                                    onBlur={handleBlur} onChange={handleChange}
+                                    value={values.githubId}
+                                    error={Boolean(touched.githubId) && Boolean(errors.githubId)}
+                                    helperText={touched.githubId && errors.githubId}
                                     sx={{ gridColumn: "span 2" }} />
                             </>
                         )}

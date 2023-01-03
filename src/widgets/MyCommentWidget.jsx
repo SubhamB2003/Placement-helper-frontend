@@ -39,9 +39,10 @@ function MyCommentWidget({ postId }) {
                     required
                     sx={{
                         width: `${isLabView ? "400px" : "100%"}`, padding: `${isNonMobile ? "0.6rem 1.2rem" : "0.4rem 1rem"}`,
+                        height: "3rem",
                         border: "1px solid gray",
                         borderRadius: "2rem", input: {
-                            fontSize: "16px",
+                            fontSize: "17px",
                             fontFamily: "serif"
                         }
                     }}

@@ -48,7 +48,7 @@ function PostWidget({ post }) {
                 postId={curPostId}
                 description={post.description}
                 updatePostData={updatePostData}
-                friendId={post.userId}
+                postUserId={post.userId}
                 name={post.userName}
                 createdAt={post.createdAt}
                 userPicturePath={post.userPicturePath}
@@ -99,14 +99,12 @@ function PostWidget({ post }) {
                 </Flexbetween>
             </Flexbetween>
 
+            <Divider />
+            <MyCommentWidget postId={post._id} />
+
             {isComments && (
                 <Box>
                     <Divider />
-
-                    <MyCommentWidget postId={post._id} />
-
-                    <Divider />
-
                     {post.comments.map((commentData) => (
                         <CommentWidget commentData={commentData} key={commentData._id} curPostId={curPostId} />
                     ))}
