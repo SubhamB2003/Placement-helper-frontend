@@ -13,20 +13,26 @@ function HomePage() {
     const user = useSelector((state) => state.user);
     const userId = user._id;
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
+    const date = new Date();
+    let year = date.getFullYear();
 
     return (
         <Box>
             <Navbar />
-            <Box width="100%" padding="2rem 6%"
-                display={isNonMobile ? "flex" : "block"} gap="2rem"
+            <Box width="100%" padding={isNonMobile ? "2rem 8%" : "2rem 6%"}
+                display={isNonMobile ? "flex" : "block"}
                 justifyContent="space-between">
                 <Box flexBasis={isNonMobile && "26%"}>
                     <UserWidget user={user} />
                 </Box>
                 <Box flexBasis={isNonMobile && "40%"}
                     mt={!isNonMobile && "2rem"}>
-                    <MyPostWidget />
-                    <Box m="2rem 0" />
+                    {year - user.graduateYear > 0 &&
+                        <>
+                            <MyPostWidget />
+                            <Box m="2rem 0" />
+                        </>
+                    }
                     <PostsWidget userId={userId} />
                 </Box>
                 {isNonMobile && (

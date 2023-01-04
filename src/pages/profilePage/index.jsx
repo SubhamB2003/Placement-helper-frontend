@@ -16,6 +16,7 @@ function ProfilePage({ newUser = false }) {
     const { userId } = useParams();
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
+
     const getUser = async () => {
         const res = await axios.get(`http://localhost:3030/users/${userId}`);
         setUser(res.data);
@@ -32,14 +33,12 @@ function ProfilePage({ newUser = false }) {
                 display={isNonMobile ? "flex" : "block"}
                 gap="2rem" justifyContent="center"
             >
-                <Box flexBasis={isNonMobile && "26%"}>
+                <Box flexBasis={isNonMobile && "28%"}>
                     <UserWidget user={user} />
                     <Box m="2rem 0" />
                 </Box>
 
-                <Box flexBasis={isNonMobile && "42%"}
-                    mt={!isNonMobile && "2rem"}
-                >
+                <Box flexBasis={isNonMobile && "42%"} mt={!isNonMobile && "2rem"}>
                     <PostsWidget userId={userId} isProfile />
                 </Box>
             </Box>

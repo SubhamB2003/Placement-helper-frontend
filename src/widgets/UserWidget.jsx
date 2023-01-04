@@ -6,7 +6,7 @@ import WidgetWrapper from "../components/WidgetWrapper";
 import UserImage from "../components/UserImage";
 import {
     EmailOutlined, Facebook, FemaleOutlined, GitHub, InfoOutlined, Instagram, LinkedIn, LocationOnOutlined, MaleOutlined, ManageAccountsOutlined,
-    PhoneAndroidOutlined, TransgenderOutlined
+    PhoneAndroidOutlined, SchoolOutlined, TransgenderOutlined
 } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 
@@ -67,6 +67,10 @@ function UserWidget({ user }) {
                     {user.gender.toUpperCase() === "MALE" ? <MaleOutlined fontSize='medium' sx={{ color: main }} />
                         : user.gender.toUpperCase() === "FEMALE" ? <FemaleOutlined fontSize='medium' sx={{ color: main }} /> : <TransgenderOutlined fontSize='medium' sx={{ color: main }} />}
                     <Typography variant='h5' fontWeight="500" fontFamily="serif" color={main}>{user.gender}</Typography>
+                </Box>
+                <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+                    <SchoolOutlined fontSize='medium' sx={{ color: main }} />
+                    <Typography variant='h5' fontWeight="500" fontFamily="serif" color={main}>{user.graduateYear}</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap="1rem">
                     <InfoOutlined fontSize='medium' sx={{ color: main }} />
