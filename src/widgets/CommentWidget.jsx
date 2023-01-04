@@ -91,7 +91,7 @@ function CommentWidget({ commentData, curPostId }) {
                     <Typography fontFamily="serif" fontSize={isNonMobile ? 18 : 16} color={main}>{commentData.comment}</Typography>
                 </Box>
             </Box>
-            {<Divider />}
+            <Divider />
         </Box>
     )
 }

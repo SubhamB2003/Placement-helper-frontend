@@ -41,6 +41,8 @@ function UpdateProfileWidget() {
 
         if (values.picture) {
             formData.append("picturePath", values.picture.name);
+        } else {
+            formData.append("picturePath", user.picturePath);
         }
 
         for (let value in values) {
@@ -114,14 +116,14 @@ function UpdateProfileWidget() {
                                     value={values.userName}
                                     error={Boolean(touched.userName) && Boolean(errors.userName)}
                                     helperText={touched.userName && errors.userName}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif" } }} />
                                 <TextField autoComplete='off' label="Phone number" name="phoneNo"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.phoneNo}
                                     error={Boolean(touched.phoneNo) && Boolean(errors.phoneNo)}
                                     helperText={touched.phoneNo && errors.phoneNo}
-                                    sx={{ gridColumn: "span 2" }} />
-                                <FormControl sx={{ gridColumn: "span 2" }}>
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif" } }} />
+                                <FormControl sx={{ gridColumn: "span 2", fontFamily: "serif" }}>
                                     <InputLabel id="demo-simple-select-label">Gender</InputLabel>
                                     <Select label="Gender"
                                         labelId="demo-simple-select-label" id="demo-simple-select"
@@ -130,9 +132,9 @@ function UpdateProfileWidget() {
                                         error={Boolean(touched.gender) && Boolean(errors.gender)}
                                         helpertext={touched.gender && errors.gender}
                                     >
-                                        <MenuItem value="Male">Male</MenuItem>
-                                        <MenuItem value="Female">Female</MenuItem>
-                                        <MenuItem value="Other">Others</MenuItem>
+                                        <MenuItem value="Male" sx={{ fontFamily: "serif" }}>Male</MenuItem>
+                                        <MenuItem value="Female" sx={{ fontFamily: "serif" }}>Female</MenuItem>
+                                        <MenuItem value="Other" sx={{ fontFamily: "serif" }}>Others</MenuItem>
                                     </Select>
                                 </FormControl>
                                 <TextField autoComplete='off' label="Profession" name="profession"
@@ -140,44 +142,44 @@ function UpdateProfileWidget() {
                                     value={values.profession}
                                     error={Boolean(touched.profession) && Boolean(errors.profession)}
                                     helperText={touched.profession && errors.profession}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif" } }} />
                                 <TextField autoComplete='off' label="Location" name="location"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.location}
                                     error={Boolean(touched.location) && Boolean(errors.location)}
                                     helperText={touched.location && errors.location}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif" } }} />
                                 <TextField autoComplete='off' label="About" name="about"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.about}
                                     error={Boolean(touched.about) && Boolean(errors.about)}
                                     helperText={touched.about && errors.about}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif" } }} />
 
                                 <TextField autoComplete='off' label="Facebook ID" name="facebookId"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.facebookId}
                                     error={Boolean(touched.facebookId) && Boolean(errors.facebookId)}
                                     helperText={touched.facebookId && errors.facebookId}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif" } }} />
                                 <TextField autoComplete='off' label="Instagram ID" name="instagramId"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.instagramId}
                                     error={Boolean(touched.instagramId) && Boolean(errors.instagramId)}
                                     helperText={touched.instagramId && errors.instagramId}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif" } }} />
                                 <TextField autoComplete='off' label="Linkedin ID" name="linkedinId"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.linkedinId}
                                     error={Boolean(touched.linkedinId) && Boolean(errors.linkedinId)}
                                     helperText={touched.linkedinId && errors.linkedinId}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif" } }} />
                                 <TextField autoComplete='off' label="Github ID" name="githubId"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.githubId}
                                     error={Boolean(touched.githubId) && Boolean(errors.githubId)}
                                     helperText={touched.githubId && errors.githubId}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif" } }} />
                             </Box>
 
                             <Box>
@@ -187,7 +189,9 @@ function UpdateProfileWidget() {
                                     type="submit"
                                     sx={{
                                         m: "2rem 0",
-                                        p: "1rem",
+                                        p: "0.6rem 1rem",
+                                        fontFamily: "serif",
+                                        fontSize: "16px"
                                     }}
                                 >
                                     Update

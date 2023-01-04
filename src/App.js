@@ -3,6 +3,7 @@ import { CircularProgress, createTheme, CssBaseline, Stack, ThemeProvider } from
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { themeSettings } from "./theme";
+import SharePost from './pages/Share';
 
 
 const AuthPage = lazy(() => import('./pages/loginPage'));
@@ -40,6 +41,7 @@ function App() {
               <Route path='/profile/:userId' element={isAuth ? <ProfilePage /> : <Navigate to="/" />} />
               <Route path='/profile/update' element={isAuth ? <UpdateProfileWidget /> : <Navigate to="/" />} />
               <Route path='/user/saveposts' element={isAuth ? <SavePosts /> : <Navigate to="/" />} />
+              <Route path='/sharepost/:postId' element={<SharePost />} />
             </Routes>
           </Suspense>
         </BrowserRouter>

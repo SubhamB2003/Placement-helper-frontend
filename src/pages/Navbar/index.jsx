@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogout, setMode } from "../../state/index";
 import { useNavigate } from "react-router-dom";
 import { DarkMode, LightMode, LogoutOutlined, SaveOutlined, Search } from "@mui/icons-material";
-import { Box, Divider, IconButton, InputBase, MenuItem, Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Divider, IconButton, InputBase, Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Flexbetween from "../../components/Flexbetween";
 import UserImage from '../../components/UserImage';
 
@@ -106,7 +106,7 @@ function Navbar() {
                     )}
                 </Box>
             </Flexbetween>
-        </Flexbetween>
+        </Flexbetween >
     )
 }
 

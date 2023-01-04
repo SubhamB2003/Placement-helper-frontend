@@ -20,10 +20,10 @@ function HomePage() {
             <Box width="100%" padding="2rem 6%"
                 display={isNonMobile ? "flex" : "block"} gap="2rem"
                 justifyContent="space-between">
-                <Box flexBasis={isNonMobile && "28%"}>
+                <Box flexBasis={isNonMobile && "26%"}>
                     <UserWidget user={user} />
                 </Box>
-                <Box flexBasis={isNonMobile && "44%"}
+                <Box flexBasis={isNonMobile && "40%"}
                     mt={!isNonMobile && "2rem"}>
                     <MyPostWidget />
                     <Box m="2rem 0" />

@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Flexbetween from '../components/Flexbetween';
-import UserImage from '../components/UserImage';
+// import UserImage from '../components/UserImage';
 import { setPost } from '../state';
 
 
@@ -34,7 +34,7 @@ function MyCommentWidget({ postId }) {
     return (
         <Box display="flex" justifyContent="space-around" padding="10px 0">
             <Flexbetween gap={isLabView ? "1rem" : "0.5rem"}>
-                <UserImage image={user.picturePath} size={55} />
+                {/* <UserImage image={user.picturePath} size={55} /> */}
                 <InputBase
                     placeholder="Write a comment..."
                     onChange={(e) => setComment(e.target.value)}
