@@ -22,6 +22,8 @@ function MyPostWidget() {
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
     const mediumMain = palette.neutral.mediumMain;
     const medium = palette.neutral.medium;
+    const main = palette.neutral.main;
+
 
     const handlePost = async () => {
         const formData = new FormData();
@@ -56,7 +58,8 @@ function MyPostWidget() {
                         border: "1px solid gray",
                         borderRadius: "2rem", input: {
                             fontSize: "18px",
-                            fontFamily: "serif"
+                            fontFamily: "serif",
+                            color: main
                         }
                     }}
                 />

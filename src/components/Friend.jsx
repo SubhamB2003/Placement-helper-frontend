@@ -6,15 +6,18 @@ import Flexbetween from './Flexbetween';
 import UserImage from './UserImage';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { setPosts, setSavePosts } from '../state';
+import { setPosts, setSavePosts, setUser } from '../state';
+
 
 
 function Friend({ postUserId, name, createdAt, userPicturePath, postId, updatePostData, description }) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
     const userId = useSelector((state) => state.user._id);
     const [open, setOpen] = useState();
+    const isSave = user.savePosts.includes(postId);
 
     const { palette } = useTheme();
     const main = palette.neutral.main;
@@ -30,8 +33,8 @@ function Friend({ postUserId, name, createdAt, userPicturePath, postId, updatePo
 
     const handleSavePost = async (postId) => {
         const res = await axios.patch(`http://localhost:3030/users/${userId}/${postId}`);
-        console.log(res.data)
-        dispatch(setSavePosts(res.data))
+        dispatch(setSavePosts(res.data));
+        dispatch(setUser({ user: res.data }));
     }
 
 
@@ -66,24 +69,26 @@ function Friend({ postUserId, name, createdAt, userPicturePath, postId, updatePo
                             <>
                                 <Box display="flex" justifyItems="center" padding="0.5rem 0.6rem" sx={{ cursor: "pointer" }}
                                     onClick={() => updatePostData(postId, description)}>
-                                    <EditOutlined fontSize="small" sx={{ marginRight: "10px" }} />
-                                    <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem">Edit</Typography>
+                                    <EditOutlined fontSize="small" sx={{ marginRight: "10px", color: main }} />
+                                    <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem" color={main}>Edit</Typography>
                                 </Box>
 
                                 <Divider />
 
                                 <Box display="flex" justifyItems="center" padding="0.5rem 0.6rem" sx={{ cursor: "pointer" }}
                                     onClick={() => handlePostRemove(postId)}>
-                                    <DeleteOutline fontSize="small" sx={{ marginRight: "10px" }} />
-                                    <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem">Delete</Typography>
+                                    <DeleteOutline fontSize="small" sx={{ marginRight: "10px", color: main }} />
+                                    <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem" color={main}>Delete</Typography>
                                 </Box>
                             </>
                         )}
                         {postUserId !== userId && (
                             <Box display="flex" justifyItems="center" padding="0.6rem 0.8rem" sx={{ cursor: "pointer" }}
                                 onClick={() => handleSavePost(postId)}>
-                                <SaveOutlined fontSize="small" sx={{ marginRight: "10px" }} />
-                                <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem">Save</Typography>
+                                <SaveOutlined fontSize="small" sx={{ marginRight: "10px", color: main }} />
+                                <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem" color={main}>
+                                    {isSave ? "Unsave" : "Save"}
+                                </Typography>
                             </Box>
                         )}
                     </Box >

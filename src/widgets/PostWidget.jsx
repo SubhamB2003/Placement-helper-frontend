@@ -1,5 +1,5 @@
 import { ChatBubbleOutlineRounded, FavoriteBorderOutlined, FavoriteOutlined, ShareOutlined } from '@mui/icons-material';
-import { Box, Divider, IconButton, Typography } from '@mui/material';
+import { Box, Divider, IconButton, Typography, useTheme } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,9 +25,9 @@ function PostWidget({ post }) {
     const isLiked = Boolean(post.likes[userId]);
     const likeCount = Object.keys(post.likes).length;
 
-    // const { palette } = useTheme();
-    // const main = palette.neutral.main;
-    // const primary = palette.primary.main;
+    const { palette } = useTheme();
+    const main = palette.neutral.main;
+
 
     const AddRemoveLike = async () => {
         const res = await axios.patch(`http://localhost:3030/posts/${curPostId}/likes`, { userId });
@@ -54,7 +54,7 @@ function PostWidget({ post }) {
                 userPicturePath={post.userPicturePath}
             />
             <Typography sx={{ mt: "1rem", padding: "4px" }} fontFamily='serif'
-                fontSize={17}>{post.description}</Typography>
+                fontSize={17} color={main}>{post.description}</Typography>
             {post.picturePath && (
                 <img width="100%" style={{
                     borderRadius: "0.75rem",
@@ -81,21 +81,21 @@ function PostWidget({ post }) {
                             <FavoriteBorderOutlined />
                         )}
                     </IconButton>
-                    <Typography fontFamily="serif" fontSize={15}>Like</Typography>
+                    <Typography fontFamily="serif" fontSize={15} color={main}>Like</Typography>
                 </Flexbetween>
 
                 <Flexbetween gap="0.3rem" onClick={() => setIsComments((cmt) => !cmt)} sx={{ cursor: "pointer" }}>
                     <IconButton>
                         <ChatBubbleOutlineRounded />
                     </IconButton>
-                    <Typography fontFamily="serif" fontSize={15}>Comment</Typography>
+                    <Typography fontFamily="serif" fontSize={15} color={main}>Comment</Typography>
                 </Flexbetween>
 
                 <Flexbetween gap="0.3rem" sx={{ cursor: "pointer" }}>
                     <IconButton>
                         <ShareOutlined />
                     </IconButton>
-                    <Typography fontFamily="serif" fontSize={15}>Share</Typography>
+                    <Typography fontFamily="serif" fontSize={15} color={main}>Share</Typography>
                 </Flexbetween>
             </Flexbetween>
 

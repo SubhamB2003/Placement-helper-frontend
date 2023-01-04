@@ -22,6 +22,7 @@ function Navbar() {
     const neutralLight = theme.palette.neutral.light;
     const primaryLight = theme.palette.primary.light;
     const alt = theme.palette.background.alt;
+    const main = theme.palette.neutral.main;
 
     const handleMenu = () => {
         setOpen((toggle) => !toggle);
@@ -91,15 +92,15 @@ function Navbar() {
                             <Box display="flex" padding="0.5rem" sx={{ cursor: "pointer" }}
                                 onClick={() => navigate(`/user/saveposts`)}>
                                 <Box display="flex" justifyContent="center" alignItems="center">
-                                    <SaveOutlined sx={{ fontSize: "18px" }} />
+                                    <SaveOutlined sx={{ fontSize: "18px", color: main }} />
                                 </Box>
-                                <Typography fontFamily="serif" fontSize="1rem" paddingLeft="0.4rem">Save</Typography>
+                                <Typography fontFamily="serif" fontSize="1rem" paddingLeft="0.4rem" color={main}>Save</Typography>
                             </Box>
                             <Divider />
                             <Box display="flex" padding="0.5rem" sx={{ cursor: "pointer" }}
                                 onClick={() => dispatch(setLogout())}>
-                                <LogoutOutlined sx={{ fontSize: "18px" }} />
-                                <Typography fontFamily="serif" fontSize="0.9rem">Log Out</Typography>
+                                <LogoutOutlined sx={{ fontSize: "18px", color: main }} />
+                                <Typography fontFamily="serif" fontSize="0.9rem" color={main}>Log Out</Typography>
                             </Box>
                         </Box>
                     )}

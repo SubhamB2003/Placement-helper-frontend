@@ -15,6 +15,9 @@ function CommentWidget({ commentData, curPostId }) {
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
     const userId = useSelector((state) => state.user._id);
     const neutralLight = palette.neutral.light;
+    const main = palette.neutral.main;
+    const medium = palette.neutral.medium;
+
     const cmtId = commentData._id;
     const postId = curPostId;
     const [open, setOpen] = useState();
@@ -43,8 +46,8 @@ function CommentWidget({ commentData, curPostId }) {
                     <Box display="flex" alignItems="center" gap={2}>
                         <UserImage image={commentData.userPicturePath} size={isNonMobile ? 50 : 45} />
                         <Box>
-                            <Typography fontFamily="serif" fontSize={isNonMobile ? 18 : 16}>{commentData.userName}</Typography>
-                            <Typography fontFamily="serif" fontSize={10}>{new Date(commentData.updatedAt).toLocaleString()}</Typography>
+                            <Typography fontFamily="serif" color={main} fontSize={isNonMobile ? 18 : 16}>{commentData.userName}</Typography>
+                            <Typography fontFamily="serif" color={medium} fontSize={10}>{new Date(commentData.updatedAt).toLocaleString()}</Typography>
                         </Box>
                     </Box>
                     <Box sx={{ top: 0 }}>
@@ -68,16 +71,16 @@ function CommentWidget({ commentData, curPostId }) {
                                 {commentData.userId === userId && <>
                                     <Box display="flex" justifyItems="center" padding="0.5rem 0.6rem" sx={{ cursor: "pointer" }}
                                         onClick={() => updateCommentData(commentData.comment)}>
-                                        <EditOutlined fontSize="small" sx={{ marginRight: "10px" }} />
-                                        <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem">Edit</Typography>
+                                        <EditOutlined fontSize="small" sx={{ marginRight: "10px", color: main }} />
+                                        <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem" color={main}>Edit</Typography>
                                     </Box>
 
                                     <Divider />
 
                                     <Box display="flex" justifyItems="center" padding="0.5rem 0.6rem" sx={{ cursor: "pointer" }}
                                         onClick={() => handlePostRemove(cmtId)}>
-                                        <DeleteOutline fontSize="small" sx={{ marginRight: "10px" }} />
-                                        <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem">Delete</Typography>
+                                        <DeleteOutline fontSize="small" sx={{ marginRight: "10px", color: main }} />
+                                        <Typography fontFamily="serif" fontWeight="500" fontSize="0.9rem" color={main}>Delete</Typography>
                                     </Box>
                                 </>}
                             </Box >
@@ -85,7 +88,7 @@ function CommentWidget({ commentData, curPostId }) {
                     </Box>
                 </Flexbetween>
                 <Box sx={{ padding: "0 0 5px 0" }}>
-                    <Typography fontFamily="serif" fontSize={isNonMobile ? 18 : 16}>{commentData.comment}</Typography>
+                    <Typography fontFamily="serif" fontSize={isNonMobile ? 18 : 16} color={main}>{commentData.comment}</Typography>
                 </Box>
             </Box>
             {<Divider />}

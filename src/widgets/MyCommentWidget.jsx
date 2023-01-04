@@ -1,5 +1,5 @@
 import { SendOutlined } from '@mui/icons-material';
-import { Box, IconButton, InputBase, useMediaQuery } from '@mui/material';
+import { Box, IconButton, InputBase, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,9 @@ function MyCommentWidget({ postId }) {
     const user = useSelector((state) => state.user);
     const userId = user._id;
     const updatedAt = new Date();
+
+    const { palette } = useTheme();
+    const main = palette.neutral.main;
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
     const isLabView = useMediaQuery("(min-width: 700px)");
     const [comment, setComment] = useState("");
@@ -43,7 +46,8 @@ function MyCommentWidget({ postId }) {
                         border: "1px solid gray",
                         borderRadius: "2rem", input: {
                             fontSize: "17px",
-                            fontFamily: "serif"
+                            fontFamily: "serif",
+                            color: main
                         }
                     }}
                 />

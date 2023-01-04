@@ -1,5 +1,5 @@
 import { CloseOutlined } from '@mui/icons-material';
-import { Box, Button, IconButton, Modal, TextField, Typography } from '@mui/material';
+import { Box, Button, IconButton, Modal, TextField, Typography, useTheme } from '@mui/material';
 import axios from 'axios';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,8 @@ import Flexbetween from './Flexbetween';
 
 function ModelPopup({ setOpenModal, openModal, postId, desc, setDesc, cmtId, comment, setComment, isComment = false }) {
 
+    const { palette } = useTheme();
+    const main = palette.neutral.main;
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.user._id);
     const updatedAt = new Date();
@@ -53,11 +55,18 @@ function ModelPopup({ setOpenModal, openModal, postId, desc, setDesc, cmtId, com
                 >
                     <Box sx={{
                         position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-                        width: 400, bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4,
+                        width: 400, bgcolor: 'background.paper', boxShadow: 24, p: 4,
+
                     }}>
                         <Flexbetween>
-                            <Typography id="modal-modal-title">{isComment ? "Comment Update" : "Post Update"}</Typography>
-                            <IconButton onClick={() => setOpenModal(false)}>
+                            <Typography id="modal-modal-title" fontFamily="serif" fontSize={20} color={main}>{isComment ? "Comment Update" : "Post Update"}</Typography>
+                            <IconButton onClick={() => setOpenModal(false)} sx={{
+                                top: 'calc(-1/4 * var(--IconButton-size))',
+                                right: 'calc(-1/4 * var(--IconButton-size))',
+                                boxShadow: '0 2px 12px 0 rgba(0 0 0 / 0.2)',
+                                borderRadius: '50%',
+                                bgcolor: 'background.body',
+                            }}>
                                 <CloseOutlined />
                             </IconButton>
                         </Flexbetween>
@@ -65,14 +74,26 @@ function ModelPopup({ setOpenModal, openModal, postId, desc, setDesc, cmtId, com
                             {isComment ? (
                                 <TextField label="Comment" name="comment" required
                                     autoComplete='off' onChange={(e) => setComment(e.target.value)}
-                                    value={comment} sx={{ gridColumn: "span 2" }} />
+                                    value={comment} sx={{
+                                        gridColumn: "span 2", input: {
+                                            fontSize: "18px",
+                                            fontFamily: "serif",
+                                            color: main
+                                        }
+                                    }} />
                             ) : (
                                 <TextField label="Description" name="description" required
                                     autoComplete='off' onChange={(e) => setDesc(e.target.value)}
-                                    value={desc} sx={{ gridColumn: "span 2" }} />
+                                    value={desc} sx={{
+                                        gridColumn: "span 2", input: {
+                                            fontSize: "16px",
+                                            fontFamily: "serif",
+                                            color: main
+                                        }
+                                    }} />
                             )}
 
-                            <Button sx={{ gridColumn: "span 2" }} variant="outlined" type='submit'>
+                            <Button sx={{ gridColumn: "span 2", fontFamily: "serif", fontSize: "16px" }} variant="outlined" type='submit'>
                                 Update
                             </Button>
                         </form>

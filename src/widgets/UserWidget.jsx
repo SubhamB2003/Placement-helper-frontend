@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Divider, IconButton, Tooltip, Typography } from '@mui/material';
+import { Box, Divider, IconButton, Tooltip, Typography, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Flexbetween from '../components/Flexbetween';
 import WidgetWrapper from "../components/WidgetWrapper";
@@ -11,10 +11,12 @@ import {
 import { useSelector } from 'react-redux';
 
 function UserWidget({ user }) {
-    console.log(user)
+
     const navigate = useNavigate();
     const userId = useSelector((state) => state.user._id);
 
+    const { palette } = useTheme();
+    const main = palette.neutral.main;
     if (!user) return null;
 
     const char = user.userName.charAt(0).toUpperCase();
@@ -28,8 +30,8 @@ function UserWidget({ user }) {
                 <Flexbetween onClick={() => navigate(`/profile/${user._id}`)} gap="1rem" sx={{ cursor: "pointer" }}>
                     <UserImage image={user.picturePath} size={60} />
                     <Box>
-                        <Typography variant='h4' fontWeight="500" fontFamily="serif">{name}</Typography>
-                        <Typography variant='h6' fontWeight="500" fontFamily="serif">{user.profession}</Typography>
+                        <Typography variant='h4' fontWeight="500" fontFamily="serif" color={main}>{name}</Typography>
+                        <Typography variant='h6' fontWeight="500" fontFamily="serif" color={main}>{user.profession}</Typography>
                     </Box>
                 </Flexbetween>
                 {userId === user._id && (
@@ -45,12 +47,12 @@ function UserWidget({ user }) {
 
             <Box p="1rem 0">
                 <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-                    <EmailOutlined fontSize='medium' />
-                    <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.email}</Typography>
+                    <EmailOutlined fontSize='medium' sx={{ color: main }} />
+                    <Typography variant='h5' fontWeight="500" fontFamily="serif" color={main} >{user.email}</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap="1rem">
-                    <PhoneAndroidOutlined fontSize='medium' />
-                    <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.phoneNo}</Typography>
+                    <PhoneAndroidOutlined fontSize='medium' sx={{ color: main }} />
+                    <Typography variant='h5' fontWeight="500" fontFamily="serif" color={main}>{user.phoneNo}</Typography>
                 </Box>
             </Box>
 
@@ -58,17 +60,17 @@ function UserWidget({ user }) {
 
             <Box p="1rem 0">
                 <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-                    <LocationOnOutlined fontSize='medium' />
-                    <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.location}</Typography>
+                    <LocationOnOutlined fontSize='medium' sx={{ color: main }} />
+                    <Typography variant='h5' fontWeight="500" fontFamily="serif" color={main}>{user.location}</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-                    {user.gender.toUpperCase() === "MALE" ? <MaleOutlined fontSize='medium' />
-                        : user.gender.toUpperCase() === "FEMALE" ? <FemaleOutlined fontSize='medium' /> : <TransgenderOutlined fontSize='medium' />}
-                    <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.gender}</Typography>
+                    {user.gender.toUpperCase() === "MALE" ? <MaleOutlined fontSize='medium' sx={{ color: main }} />
+                        : user.gender.toUpperCase() === "FEMALE" ? <FemaleOutlined fontSize='medium' sx={{ color: main }} /> : <TransgenderOutlined fontSize='medium' sx={{ color: main }} />}
+                    <Typography variant='h5' fontWeight="500" fontFamily="serif" color={main}>{user.gender}</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap="1rem">
-                    <InfoOutlined fontSize='medium' />
-                    <Typography variant='h5' fontWeight="500" fontFamily="serif">{user.about}</Typography>
+                    <InfoOutlined fontSize='medium' sx={{ color: main }} />
+                    <Typography variant='h5' fontWeight="500" fontFamily="serif" color={main}>{user.about}</Typography>
                 </Box>
             </Box>
 
@@ -79,7 +81,7 @@ function UserWidget({ user }) {
                     <a href={user.facebookId} target="_blank" rel="noreferrer">
                         <Facebook sx={{
                             fontSize: "1.6rem",
-                            fill: "#000",
+                            color: main,
                             "&:hover": {
                                 fill: "#2563eb"
                             }
@@ -90,7 +92,7 @@ function UserWidget({ user }) {
                     <a href={user.instagramId} target="_blank" rel="noreferrer">
                         <Instagram sx={{
                             fontSize: "1.6rem",
-                            fill: "#000",
+                            color: main,
                             "&:hover": {
                                 fill: "#9d174d"
                             }
@@ -101,7 +103,7 @@ function UserWidget({ user }) {
                     <a href={user.linkedinId} target="_blank" rel="noreferrer">
                         <LinkedIn sx={{
                             fontSize: "1.6rem",
-                            fill: "#000",
+                            color: main,
                             "&:hover": {
                                 fill: "#0891b2"
                             }
@@ -112,7 +114,7 @@ function UserWidget({ user }) {
                     <a href={user.githubId} target="_blank" rel="noreferrer">
                         <GitHub sx={{
                             fontSize: "1.6rem",
-                            fill: "#000",
+                            color: main,
                             "&:hover": {
                                 fill: "#000"
                             }

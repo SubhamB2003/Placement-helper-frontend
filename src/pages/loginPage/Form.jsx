@@ -123,7 +123,8 @@ function Form() {
                         sx={{
                             "& > div": {
                                 gridColumn: isNonMobile ? undefined : "span 4"
-                            }
+                            },
+                            fontFamily: "serif"
                         }}>
                         <TextField label="Email" name="email"
                             autoComplete='off'

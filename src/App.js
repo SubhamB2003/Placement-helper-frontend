@@ -10,10 +10,7 @@ const HomePage = lazy(() => import('./pages/homePage/index'));
 const SavePosts = lazy(() => import('./pages/savePosts'));
 const ProfilePage = lazy(() => import('./pages/profilePage/index'));
 const UpdateProfileWidget = lazy(() => import('./widgets/UpdateProfileWidget'));
-// import AuthPage from './pages/loginPage';
-// import HomePage from './pages/homePage/index';
-// import ProfilePage from './pages/profilePage/index';
-// import UpdateProfileWidget from './widgets/UpdateProfileWidget';
+
 
 
 const LoadingScreen = () => {
@@ -41,8 +38,8 @@ function App() {
             <Routes>
               <Route path='/' element={isAuth ? <HomePage /> : <AuthPage />} />
               <Route path='/profile/:userId' element={isAuth ? <ProfilePage /> : <Navigate to="/" />} />
-              <Route path='/profile/update' element={isAuth && <UpdateProfileWidget />} />
-              <Route path='/user/saveposts' element={isAuth && <SavePosts />} />
+              <Route path='/profile/update' element={isAuth ? <UpdateProfileWidget /> : <Navigate to="/" />} />
+              <Route path='/user/saveposts' element={isAuth ? <SavePosts /> : <Navigate to="/" />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
