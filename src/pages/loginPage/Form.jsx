@@ -70,9 +70,9 @@ function Form() {
 
 
     const login = async (values, onSubmitProps) => {
-        const loggedIn = await axios.post("http://localhost:3030/auth/login", values);
-
-        onSubmitProps.resetForm();
+        const loggedIn = await axios.post("http://localhost:3030/auth/login", values).catch((err) => {
+            window.alert("Invalid authentication");
+        });
 
         if (loggedIn) {
             dispatch(
@@ -92,8 +92,9 @@ function Form() {
         }
         formData.append("picturePath", values.picture.name);
 
-        const savedUserRes = await axios.post("http://localhost:3030/auth/register", formData);
-        console.log(savedUserRes.data);
+        const savedUserRes = await axios.post("http://localhost:3030/auth/register", formData).catch((err) => {
+            window.alert("Fill the mandatory fields");
+        })
 
         if (savedUserRes) {
             setPageType("login");
@@ -132,13 +133,13 @@ function Form() {
                             value={values.email}
                             error={Boolean(touched.email) && Boolean(errors.email)}
                             helperText={touched.email && errors.email}
-                            sx={{ gridColumn: "span 2" }} />
+                            sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
                         <TextField autoComplete='off' label="Password" name="password" type={visible ? "text" : "password"}
                             onBlur={handleBlur} onChange={handleChange}
                             value={values.password}
                             error={Boolean(touched.password) && Boolean(errors.password)}
                             helperText={touched.password && errors.password}
-                            sx={{ gridColumn: "span 2" }} InputProps={{
+                            sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end" onClick={() => setVisible((visibility) => !visibility)} sx={{ cursor: "pointer" }}>
                                         {visible ? <Visibility sx={{ right: "0", top: "0" }} /> : <VisibilityOff sx={{ right: "0", top: "0" }} />}
@@ -152,13 +153,13 @@ function Form() {
                                     value={values.userName}
                                     error={Boolean(touched.userName) && Boolean(errors.userName)}
                                     helperText={touched.userName && errors.userName}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
                                 <TextField autoComplete='off' label="Phone number" name="phoneNo"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.phoneNo}
                                     error={Boolean(touched.phoneNo) && Boolean(errors.phoneNo)}
                                     helperText={touched.phoneNo && errors.phoneNo}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
                                 <FormControl sx={{ gridColumn: "span 2" }}>
                                     <InputLabel id="demo-simple-select-label">Gender</InputLabel>
                                     <Select label="Gender"
@@ -168,9 +169,9 @@ function Form() {
                                         error={Boolean(touched.gender) && Boolean(errors.gender)}
                                         helpertext={touched.gender && errors.gender}
                                     >
-                                        <MenuItem value="Male">Male</MenuItem>
-                                        <MenuItem value="Female">Female</MenuItem>
-                                        <MenuItem value="Other">Others</MenuItem>
+                                        <MenuItem value="Male" sx={{ fontFamily: "serif" }}>Male</MenuItem>
+                                        <MenuItem value="Female" sx={{ fontFamily: "serif" }}>Female</MenuItem>
+                                        <MenuItem value="Other" sx={{ fontFamily: "serif" }}>Others</MenuItem>
                                     </Select>
                                 </FormControl>
                                 <TextField autoComplete='off' label="Profession" name="profession"
@@ -178,7 +179,7 @@ function Form() {
                                     value={values.profession}
                                     error={Boolean(touched.profession) && Boolean(errors.profession)}
                                     helperText={touched.profession && errors.profession}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
 
                                 <Box
                                     gridColumn="span 4"
@@ -220,38 +221,44 @@ function Form() {
                                     value={values.location}
                                     error={Boolean(touched.location) && Boolean(errors.location)}
                                     helperText={touched.location && errors.location}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
                                 <TextField autoComplete='off' label="About" name="about"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.about}
                                     error={Boolean(touched.about) && Boolean(errors.about)}
                                     helperText={touched.about && errors.about}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
 
                                 <TextField autoComplete='off' label="Facebook ID" name="facebookId"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.facebookId}
                                     error={Boolean(touched.facebookId) && Boolean(errors.facebookId)}
                                     helperText={touched.facebookId && errors.facebookId}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
                                 <TextField autoComplete='off' label="Instagram ID" name="instagramId"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.instagramId}
                                     error={Boolean(touched.instagramId) && Boolean(errors.instagramId)}
                                     helperText={touched.instagramId && errors.instagramId}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
                                 <TextField autoComplete='off' label="Linkedin ID" name="linkedinId"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.linkedinId}
                                     error={Boolean(touched.linkedinId) && Boolean(errors.linkedinId)}
                                     helperText={touched.linkedinId && errors.linkedinId}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
                                 <TextField autoComplete='off' label="Github ID" name="githubId"
                                     onBlur={handleBlur} onChange={handleChange}
                                     value={values.githubId}
                                     error={Boolean(touched.githubId) && Boolean(errors.githubId)}
                                     helperText={touched.githubId && errors.githubId}
-                                    sx={{ gridColumn: "span 2" }} />
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
+                                <TextField autoComplete='off' label="Graduate Year" name="graduateYear"
+                                    onBlur={handleBlur} onChange={handleChange}
+                                    value={values.graduateYear}
+                                    error={Boolean(touched.graduateYear) && Boolean(errors.graduateYear)}
+                                    helperText={touched.graduateYear && errors.graduateYear}
+                                    sx={{ gridColumn: "span 2", input: { fontFamily: "serif", fontSize: "16px" } }} />
                             </>
                         )}
                     </Box>
@@ -263,24 +270,36 @@ function Form() {
                             type="submit"
                             sx={{
                                 m: "2rem 0",
-                                p: "1rem",
+                                padding: "1rem 0.6rem",
+                                fontFamily: "serif",
+                                fontSize: "15px"
                             }}
                         >
                             {isLogin ? "LOGIN" : "REGISTER"}
                         </Button>
+                    </Box>
+                    <Flexbetween>
                         <Typography
                             onClick={() => {
                                 setPageType(isLogin ? "register" : "login");
                                 resetForm();
                             }}
-                            fontSize={15}
+                            fontFamily="serif"
+                            fontSize={17}
                             color="Highlight"
                         >
                             {isLogin
                                 ? "Don't have an account? Sign Up here."
                                 : "Already have an account? Login here."}
                         </Typography>
-                    </Box>
+                        <Typography fontFamily="serif"
+                            fontSize={17}
+                            color="Highlight" textAlign="end">
+                            {isLogin
+                                ? "Forget Password"
+                                : "Terms and conditions"}
+                        </Typography>
+                    </Flexbetween>
                 </form>
             )}
         </Formik>

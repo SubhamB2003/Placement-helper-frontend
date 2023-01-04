@@ -1,8 +1,7 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import { AttachFileOutlined, DeleteOutline, EditOutlined, GifBoxOutlined, ImageOutlined, MicOutlined } from '@mui/icons-material';
 import { Box, Button, Divider, IconButton, InputBase, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
-import axios from 'axios';
-import React from 'react';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Flexbetween from '../components/Flexbetween';
 import UserImage from '../components/UserImage';
@@ -106,7 +105,7 @@ function MyPostWidget() {
             <Flexbetween>
                 <Flexbetween gap="0.25rem" onClick={() => setIsImage((img) => !img)}>
                     <ImageOutlined sx={{ color: mediumMain }} />
-                    <Typography fontFamily="serif" sx={{ cursor: "pointer" }}>Image</Typography>
+                    <Typography fontFamily="serif" sx={{ color: mediumMain, cursor: "pointer" }}>Image</Typography>
                 </Flexbetween>
 
                 {isNonMobile && (
@@ -140,6 +139,8 @@ function MyPostWidget() {
                         color: palette.background.alt,
                         backgroundColor: "blueviolet",
                         borderRadius: "3rem",
+                        fontFamily: "serif",
+                        fontWeight: "600",
                         ":hover": { backgroundColor: "blueviolet" }
                     }}>
                     POST

@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { RWebShare } from "react-web-share";
 import { ChatBubbleOutlineRounded, FavoriteBorderOutlined, FavoriteOutlined, ShareOutlined } from '@mui/icons-material';
 import { Box, Divider, IconButton, Typography, useTheme } from '@mui/material';
-import axios from 'axios';
-import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Flexbetween from '../components/Flexbetween';
 import Friend from '../components/Friend';
@@ -63,15 +64,12 @@ function PostWidget({ post }) {
                     alt="postImage" />
             )}
 
-            <Divider />
-
             <Flexbetween>
                 <Typography marginLeft={1} fontFamily="serif" sx={{ color: "skyblue" }}>{likeCount} {likeCount > 1 ? "Likes" : "Like"}</Typography>
                 <Typography sx={{ color: "skyblue" }} fontFamily="serif">{post.comments.length} {post.comments.length > 1 ? "comments" : "comment"}</Typography>
             </Flexbetween>
 
-            <Divider />
-
+            {/* <Divider /> */}
             <Flexbetween gap="1rem">
                 <Flexbetween gap="0.3rem" onClick={AddRemoveLike} sx={{ cursor: "pointer" }}>
                     <IconButton>
@@ -91,12 +89,19 @@ function PostWidget({ post }) {
                     <Typography fontFamily="serif" fontSize={15} color={main}>Comment</Typography>
                 </Flexbetween>
 
-                <Flexbetween gap="0.3rem" sx={{ cursor: "pointer" }}>
-                    <IconButton>
-                        <ShareOutlined />
-                    </IconButton>
-                    <Typography fontFamily="serif" fontSize={15} color={main}>Share</Typography>
-                </Flexbetween>
+                <RWebShare
+                    data={{
+                        text: "Web Share",
+                        url: `http://localhost:3220/sharepost/${curPostId}`,
+                        title: "Post Data",
+                    }}>
+                    <Flexbetween gap="0.3rem" sx={{ cursor: "pointer" }}>
+                        <IconButton>
+                            <ShareOutlined />
+                        </IconButton>
+                        <Typography fontFamily="serif" fontSize={15} color={main}>Share</Typography>
+                    </Flexbetween>
+                </RWebShare>
             </Flexbetween>
 
             <Divider />
