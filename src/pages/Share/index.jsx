@@ -24,7 +24,6 @@ function SharePost() {
 
     const handleSharePost = async () => {
         const res = await axios.get(`${process.env.REACT_APP_URL}/posts/${postId}`);
-        console.log(res.data);
         setPost(res.data);
         setCurState(true);
     }
