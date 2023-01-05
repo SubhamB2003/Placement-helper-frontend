@@ -4,6 +4,7 @@ import { Box } from '@mui/system'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import MyPostWidget from '../../widgets/MyPostWidget';
 import PostsWidget from '../../widgets/PostsWidget';
 import UserWidget from '../../widgets/UserWidget';
 import Navbar from '../Navbar';
@@ -38,6 +39,8 @@ function ProfilePage({ newUser = false }) {
                 </Box>
 
                 <Box flexBasis={isNonMobile && "42%"} mt={!isNonMobile && "2rem"}>
+                    <MyPostWidget />
+                    <Box m="2rem 0" />
                     <PostsWidget userId={userId} isProfile />
                 </Box>
             </Box>

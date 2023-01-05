@@ -87,7 +87,7 @@ function SharePost() {
                                 <RWebShare
                                     data={{
                                         text: "Web Share",
-                                        url: `placement-helper-alumini/sharepost/${post._id}`,
+                                        url: `https://placement-helper-alumini.netlify.app/sharepost/${post._id}`,
                                         title: "Post Data",
                                     }}>
                                     <Flexbetween gap="0.3rem" sx={{ cursor: "pointer" }}>

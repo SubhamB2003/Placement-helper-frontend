@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Formik } from 'formik';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import imageCompression from 'browser-image-compression';
 import Navbar from '../pages/Navbar';
 import { setUser } from "../state/index";
 import { useNavigate } from 'react-router-dom';
@@ -41,15 +42,25 @@ function UpdateProfileWidget() {
 
     const userUpdate = async (values) => {
         const formData = new FormData();
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true
+        }
 
         if (values.picture) {
+            const compressImage = await imageCompression(values.picture, options);
+            const userPicture = new File([compressImage], values.picture.name);
+            formData.append("picture", userPicture);
             formData.append("picturePath", values.picture.name);
         } else {
             formData.append("picturePath", user.picturePath);
         }
 
         for (let value in values) {
-            formData.append(value, values[value]);
+            if (value !== "picture") {
+                formData.append(value, values[value]);
+            }
         }
 
         const res = await axios.patch(`${process.env.REACT_APP_URL}/user/${userId}`, formData);

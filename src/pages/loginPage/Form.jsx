@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import imageCompression from 'browser-image-compression';
 import axios from "axios";
 import { Box } from '@mui/material';
 import Dropzone from "react-dropzone";
@@ -75,7 +76,7 @@ function Form() {
         "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990"];
 
     const login = async (values, onSubmitProps) => {
-  
+
         const loggedIn = await axios.post(`${process.env.REACT_APP_URL}/auth/login`, values).catch((err) => {
             window.alert("Invalid authentication");
         });
@@ -93,15 +94,25 @@ function Form() {
 
     const register = async (values, onSubmitProps) => {
         const formData = new FormData();
-        for (let value in values) {
-            formData.append(value, values[value]);
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true
         }
+        const compressImage = await imageCompression(values.picture, options);
+        const userPicture = new File([compressImage], values.picture.name);
+
+        for (let value in values) {
+            if (value !== "picture") {
+                formData.append(value, values[value]);
+            }
+        }
+        formData.append("picture", userPicture);
         formData.append("picturePath", values.picture.name);
 
         const savedUserRes = await axios.post(`${process.env.REACT_APP_URL}/auth/register`, formData).catch((err) => {
             window.alert("Fill the mandatory fields");
         })
-
         if (savedUserRes) {
             setPageType("login");
         }
