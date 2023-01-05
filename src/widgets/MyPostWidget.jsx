@@ -32,12 +32,13 @@ function MyPostWidget() {
             maxWidthOrHeight: 1920,
             useWebWorker: true
         }
-        const compressImage = await imageCompression(image, options);
-        const userPicture = new File([compressImage], image.name);
+
         formData.append("userId", _id);
         formData.append("description", post);
 
         if (image) {
+            const compressImage = await imageCompression(image, options);
+            const userPicture = new File([compressImage], image.name);
             formData.append("picture", userPicture);
             formData.append("picturePath", image.name);
         }
