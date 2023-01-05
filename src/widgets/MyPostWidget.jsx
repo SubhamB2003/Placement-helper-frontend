@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import imageCompression from 'browser-image-compression';
 import { AttachFileOutlined, DeleteOutline, EditOutlined, GifBoxOutlined, ImageOutlined, MicOutlined } from '@mui/icons-material';
 import { Box, Button, Divider, IconButton, InputBase, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,16 +27,24 @@ function MyPostWidget() {
 
     const handlePost = async () => {
         const formData = new FormData();
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true
+        }
+        const compressImage = await imageCompression(image, options);
+        const userPicture = new File([compressImage], image.name);
         formData.append("userId", _id);
         formData.append("description", post);
+
         if (image) {
-            formData.append("picture", image);
+            formData.append("picture", userPicture);
             formData.append("picturePath", image.name);
         }
 
         const res = await axios.post(`${process.env.REACT_APP_URL}/posts`, formData);
         const posts = res.data;
-        console.log(posts);
+
         dispatch(setPosts({ posts }));
         setImage(null);
         setPost("");
