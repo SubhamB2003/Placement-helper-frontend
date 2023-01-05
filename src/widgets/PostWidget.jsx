@@ -92,7 +92,7 @@ function PostWidget({ post }) {
                 <RWebShare
                     data={{
                         text: "Web Share",
-                        url: `http://localhost:3220/sharepost/${curPostId}`,
+                        url: `https://placement-helper-alumini.netlify.app/sharepost/${curPostId}`,
                         title: "Post Data",
                     }}>
                     <Flexbetween gap="0.3rem" sx={{ cursor: "pointer" }}>
