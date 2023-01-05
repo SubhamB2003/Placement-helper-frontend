@@ -23,7 +23,7 @@ function SharePost() {
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
     const handleSharePost = async () => {
-        const res = await axios.get(`http://localhost:3030/posts/${postId}`);
+        const res = await axios.get(`${process.env.REACT_APP_URL}/posts/${postId}`);
         console.log(res.data);
         setPost(res.data);
         setCurState(true);
@@ -59,7 +59,7 @@ function SharePost() {
                                 <img width="100%" style={{
                                     borderRadius: "0.75rem",
                                     marginTop: "0.75rem"
-                                }} src={`http://localhost:3030/assets/${post.picturePath}`}
+                                }} src={`${process.env.REACT_APP_URL}/assets/${post.picturePath}`}
                                     alt="postImage" />
                             )}
 
@@ -87,8 +87,8 @@ function SharePost() {
                                 <RWebShare
                                     data={{
                                         text: "Web Share",
-                                        url: `http://localhost:3220/sharepost/${post._id}`,
-                                        title: "Alumini Post Data",
+                                        url: `placement-helper-alumini/sharepost/${post._id}`,
+                                        title: "Post Data",
                                     }}>
                                     <Flexbetween gap="0.3rem" sx={{ cursor: "pointer" }}>
                                         <IconButton>

@@ -37,7 +37,7 @@ function UpdateProfileWidget() {
         "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003",
         "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990"];
 
-    let preview = `http://localhost:3030/assets/${user.picturePath}`;
+    let preview = `${process.env.REACT_APP_URL}/assets/${user.picturePath}`;
 
     const userUpdate = async (values) => {
         const formData = new FormData();
@@ -52,7 +52,7 @@ function UpdateProfileWidget() {
             formData.append(value, values[value]);
         }
 
-        const res = await axios.patch(`http://localhost:3030/user/${userId}`, formData);
+        const res = await axios.patch(`${process.env.REACT_APP_URL}/user/${userId}`, formData);
         dispatch(setUser({ user: res.data }));
         navigate("/");
     }

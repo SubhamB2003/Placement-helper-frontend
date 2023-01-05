@@ -75,7 +75,8 @@ function Form() {
         "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990"];
 
     const login = async (values, onSubmitProps) => {
-        const loggedIn = await axios.post("http://localhost:3030/auth/login", values).catch((err) => {
+  
+        const loggedIn = await axios.post(`${process.env.REACT_APP_URL}/auth/login`, values).catch((err) => {
             window.alert("Invalid authentication");
         });
 
@@ -97,7 +98,7 @@ function Form() {
         }
         formData.append("picturePath", values.picture.name);
 
-        const savedUserRes = await axios.post("http://localhost:3030/auth/register", formData).catch((err) => {
+        const savedUserRes = await axios.post(`${process.env.REACT_APP_URL}/auth/register`, formData).catch((err) => {
             window.alert("Fill the mandatory fields");
         })
 

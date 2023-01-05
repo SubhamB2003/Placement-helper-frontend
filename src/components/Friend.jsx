@@ -26,13 +26,13 @@ function Friend({ postUserId, name, createdAt, userPicturePath, postId, updatePo
 
 
     const handlePostRemove = async (postId) => {
-        const res = await axios.delete(`http://localhost:3030/posts/${postId}/removepost`);
+        const res = await axios.delete(`${process.env.REACT_APP_URL}/posts/${postId}/removepost`);
         const posts = res.data;
         dispatch(setPosts({ posts }));
     }
 
     const handleSavePost = async (postId) => {
-        const res = await axios.patch(`http://localhost:3030/users/${userId}/${postId}`);
+        const res = await axios.patch(`${process.env.REACT_APP_URL}/users/${userId}/${postId}`);
         dispatch(setSavePosts(res.data));
         dispatch(setUser({ user: res.data }));
     }

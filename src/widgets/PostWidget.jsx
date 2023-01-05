@@ -31,7 +31,7 @@ function PostWidget({ post }) {
 
 
     const AddRemoveLike = async () => {
-        const res = await axios.patch(`http://localhost:3030/posts/${curPostId}/likes`, { userId });
+        const res = await axios.patch(`${process.env.REACT_APP_URL}/posts/${curPostId}/likes`, { userId });
         const Data = res.data;
         dispatch(setPost({ post: Data }));
     }
@@ -60,7 +60,7 @@ function PostWidget({ post }) {
                 <img width="100%" style={{
                     borderRadius: "0.75rem",
                     marginTop: "0.75rem"
-                }} src={`http://localhost:3030/assets/${post.picturePath}`}
+                }} src={`${process.env.REACT_APP_URL}/assets/${post.picturePath}`}
                     alt="postImage" />
             )}
 

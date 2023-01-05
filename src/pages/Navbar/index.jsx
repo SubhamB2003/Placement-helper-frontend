@@ -2,31 +2,42 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout, setMode } from "../../state/index";
 import { useNavigate } from "react-router-dom";
-import { DarkMode, LightMode, LogoutOutlined, SaveOutlined, Search } from "@mui/icons-material";
+import { DarkMode, InfoOutlined, LightMode, LogoutOutlined, SaveOutlined, Search } from "@mui/icons-material";
 import { Box, Divider, IconButton, InputBase, Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Flexbetween from "../../components/Flexbetween";
 import UserImage from '../../components/UserImage';
+import SearchWidget from '../../widgets/SearchWidget';
 
 
 function Navbar() {
 
     const [open, setOpen] = useState(false);
+    const [query, setQuery] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
     const mode = useSelector((state) => state.mode);
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
-
     const theme = useTheme();
     const neutralLight = theme.palette.neutral.light;
     const primaryLight = theme.palette.primary.light;
     const alt = theme.palette.background.alt;
     const main = theme.palette.neutral.main;
+    let timer;
 
     const handleMenu = () => {
         setOpen((toggle) => !toggle);
     };
+
+    const handleChange = (e) => {
+        if (timer) clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            setQuery(e.target.value);
+        }, 1000);
+    }
+
 
     return (
         <Flexbetween padding="1rem 6%" backgroundColor={alt}>
@@ -44,22 +55,42 @@ function Navbar() {
             {/* DESKTOP VIEW NAV */}
             <Flexbetween gap={isNonMobile ? "3rem" : "1rem"}>
                 {isNonMobile && (
-                    <Flexbetween backgroundColor={neutralLight}
-                        borderRadius="10px" gap="2rem" padding="0.3rem 1.2rem"
-                        sx={{
-                            "&:hover": {
-                                color: primaryLight,
-                                cursor: "pointer",
-                            },
-                            input: {
-                                fontFamily: "serif", fontSize: "18px"
-                            }
-                        }}>
-                        <InputBase placeholder='Search' />
-                        <IconButton>
-                            <Search />
-                        </IconButton>
-                    </Flexbetween>
+                    <Box>
+                        <Flexbetween backgroundColor={neutralLight}
+                            borderRadius="10px" gap="2rem" padding="0.3rem 1.2rem"
+                            sx={{
+                                "&:hover": {
+                                    color: primaryLight,
+                                    cursor: "pointer",
+                                },
+                                input: {
+                                    fontFamily: "serif", fontSize: "18px"
+                                }
+                            }}>
+                            <InputBase placeholder='Search users...' onChange={(e) => handleChange(e)} />
+                            <Box display="flex" gap="1rem">
+                                <IconButton>
+                                    <Search />
+                                </IconButton>
+                                <IconButton>
+                                    <Tooltip title='Search using username' placement='right'>
+                                        <InfoOutlined />
+                                    </Tooltip>
+                                </IconButton>
+                            </Box>
+                        </Flexbetween>
+                        <Box
+                            position="absolute"
+                            borderRadius="16px"
+                            backgroundColor={neutralLight}
+                            sx={{
+                                vertical: 'top',
+                                zIndex: "10",
+                                marginTop: "5px"
+                            }}>
+                            <SearchWidget query={query} />
+                        </Box>
+                    </Box>
                 )}
                 <IconButton onClick={() => dispatch(setMode())} sx={{ marginRight: "20px" }}>
                     {mode === "light" ? (

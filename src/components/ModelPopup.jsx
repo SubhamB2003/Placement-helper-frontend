@@ -15,7 +15,7 @@ function ModelPopup({ setOpenModal, openModal, postId, desc, setDesc, cmtId, com
     const updatedAt = new Date();
 
     const handlePostUpdate = async () => {
-        const updatedPost = await axios.patch(`http://localhost:3030/posts`, { postId, desc });
+        const updatedPost = await axios.patch(`${process.env.REACT_APP_URL}/posts`, { postId, desc });
         const post = updatedPost.data;
         if (updatedPost.status === 200) {
             setOpenModal(false);
@@ -25,7 +25,7 @@ function ModelPopup({ setOpenModal, openModal, postId, desc, setDesc, cmtId, com
 
     const updatePostComment = async () => {
         const Data = { userId, postId, cmtId, comment, updatedAt };
-        const res = await axios.patch(`http://localhost:3030/posts/comment`, Data, {
+        const res = await axios.patch(`${process.env.REACT_APP_URL}/posts/comment`, Data, {
             headers: {
                 'Content-Type': 'application/json',
             }

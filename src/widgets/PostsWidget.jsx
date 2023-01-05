@@ -13,13 +13,13 @@ function PostsWidget({ userId, isProfile = false }) {
     const posts = useSelector((state) => state.posts);
 
     const getPosts = async () => {
-        const res = await axios.get(`http://localhost:3030/posts`);
+        const res = await axios.get(`${process.env.REACT_APP_URL}/posts`);
         const Data = res.data;
         dispatch(setPosts({ posts: Data }));
     };
 
     const getUserPosts = async () => {
-        const res = await axios.get(`http://localhost:3030/posts/${userId}/posts`);
+        const res = await axios.get(`${process.env.REACT_APP_URL}/posts/${userId}/posts`);
         const Data = res.data;
         dispatch(setPosts({ posts: Data }));
     }

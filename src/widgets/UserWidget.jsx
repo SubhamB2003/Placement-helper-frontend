@@ -5,7 +5,8 @@ import Flexbetween from '../components/Flexbetween';
 import WidgetWrapper from "../components/WidgetWrapper";
 import UserImage from "../components/UserImage";
 import {
-    EmailOutlined, Facebook, FemaleOutlined, GitHub, InfoOutlined, Instagram, LinkedIn, LocationOnOutlined, MaleOutlined, ManageAccountsOutlined,
+    EmailOutlined, Facebook, FemaleOutlined, GitHub, Instagram, LinkedIn, LocationOnOutlined, MaleOutlined, ManageAccountsOutlined,
+    Person2Outlined,
     PhoneAndroidOutlined, SchoolOutlined, TransgenderOutlined
 } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
@@ -73,7 +74,7 @@ function UserWidget({ user }) {
                     <Typography variant='h5' fontWeight="500" fontFamily="serif" color={main}>{user.graduateYear}</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap="1rem">
-                    <InfoOutlined fontSize='medium' sx={{ color: main }} />
+                    <Person2Outlined fontSize='medium' sx={{ color: main }} />
                     <Typography variant='h5' fontWeight="500" fontFamily="serif" color={main}>{user.about}</Typography>
                 </Box>
             </Box>
