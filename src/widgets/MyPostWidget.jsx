@@ -33,7 +33,7 @@ function MyPostWidget() {
             formData.append("picturePath", image.name);
         }
 
-        const res = await axios.post(`http://localhost:3030/posts`, formData);
+        const res = await axios.post(`${process.env.REACT_APP_URL}/posts`, formData);
         const posts = res.data;
         console.log(posts);
         dispatch(setPosts({ posts }));

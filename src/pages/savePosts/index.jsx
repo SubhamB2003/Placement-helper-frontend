@@ -12,8 +12,7 @@ function SavePosts() {
     const saveposts = useSelector((state) => state.user.savePosts);
     const posts = useSelector((state) => state.posts);
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
-    const date = new Date();
-    let year = date.getFullYear();
+
 
     return (
         <Box>
@@ -30,12 +29,8 @@ function SavePosts() {
                 <Box flexBasis={isNonMobile && "38%"}
                     mt={!isNonMobile && "2rem"}
                 >
-                    {year - user.graduateYear > 0 &&
-                        <>
-                            <MyPostWidget />
-                            <Box m="2rem 0" />
-                        </>
-                    }
+                    <MyPostWidget />
+                    <Box m="2rem 0" />
                     {posts.map((post) => (
                         saveposts.map((savepost) => (
                             post._id === savepost && (

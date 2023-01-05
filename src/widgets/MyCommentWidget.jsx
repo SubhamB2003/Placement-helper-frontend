@@ -24,7 +24,7 @@ function MyCommentWidget({ postId }) {
 
 
     const handleComment = async (postId) => {
-        const res = await axios.post(`http://localhost:3030/posts/comment`, { userId, postId, comment, updatedAt });
+        const res = await axios.post(`${process.env.REACT_APP_URL}/posts/comment`, { userId, postId, comment, updatedAt });
         setComment("");
         const post = res.data;
         dispatch(setPost({ post }));

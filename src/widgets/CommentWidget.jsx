@@ -27,7 +27,7 @@ function CommentWidget({ commentData, curPostId }) {
 
     const handlePostRemove = async (cmtId) => {
         const Data = { userId, postId, cmtId };
-        const res = await axios.delete(`http://localhost:3030/posts/comment`, { data: Data });
+        const res = await axios.delete(`${process.env.REACT_APP_URL}/posts/comment`, { data: Data });
         const post = res.data;
         dispatch(setPost({ post }));
     }

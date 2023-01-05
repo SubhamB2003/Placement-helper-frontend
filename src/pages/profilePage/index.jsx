@@ -4,7 +4,6 @@ import { Box } from '@mui/system'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-// import FriendListWidget from '../../widgets/FriendListWidget';
 import PostsWidget from '../../widgets/PostsWidget';
 import UserWidget from '../../widgets/UserWidget';
 import Navbar from '../Navbar';
@@ -18,7 +17,7 @@ function ProfilePage({ newUser = false }) {
 
 
     const getUser = async () => {
-        const res = await axios.get(`http://localhost:3030/users/${userId}`);
+        const res = await axios.get(`${process.env.REACT_APP_URL}/users/${userId}`);
         setUser(res.data);
     }
 
