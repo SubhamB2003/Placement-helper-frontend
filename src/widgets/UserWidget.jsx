@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Divider, IconButton, Tooltip, Typography, useTheme } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import Flexbetween from '../components/Flexbetween';
-import WidgetWrapper from "../components/WidgetWrapper";
-import UserImage from "../components/UserImage";
 import {
     EmailOutlined, Facebook, FemaleOutlined, GitHub, Instagram, LinkedIn, LocationOnOutlined, MaleOutlined, ManageAccountsOutlined,
     Person2Outlined,
     PhoneAndroidOutlined, SchoolOutlined, TransgenderOutlined
 } from '@mui/icons-material';
+import { Box, Divider, IconButton, Tooltip, Typography, useTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Flexbetween from '../components/Flexbetween';
+import UserImage from "../components/UserImage";
+import WidgetWrapper from "../components/WidgetWrapper";
 
 function UserWidget({ user }) {
 
@@ -23,13 +23,14 @@ function UserWidget({ user }) {
     const char = user.userName.charAt(0).toUpperCase();
     const name = char + user.userName.substring(1, user.userName.length);
 
+
     return (
         <WidgetWrapper>
             <Flexbetween
                 gap="0.5rem"
                 pb="1.1rem">
-                <Flexbetween onClick={() => navigate(`/profile/${user._id}`)} gap="1rem" sx={{ cursor: "pointer" }}>
-                    <UserImage image={user.picturePath} size={60} />
+                <Flexbetween gap="1rem" sx={{ cursor: "pointer" }} onClick={() => navigate(`/profile/${user._id}`)}>
+                    <UserImage image={user.picturePath} size={60} dpZoom />
                     <Box>
                         <Typography variant='h4' fontWeight="500" fontFamily="serif" color={main}>{name}</Typography>
                         <Typography variant='h6' fontWeight="500" fontFamily="serif" color={main}>{user.profession}</Typography>

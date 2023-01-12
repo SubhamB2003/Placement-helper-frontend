@@ -1,9 +1,9 @@
-import React, { useMemo, lazy, Suspense } from 'react';
 import { CircularProgress, createTheme, CssBaseline, Stack, ThemeProvider } from "@mui/material";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React, { lazy, Suspense, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { themeSettings } from "./theme";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import SharePost from './pages/Share';
+import { themeSettings } from "./theme";
 
 
 const AuthPage = lazy(() => import('./pages/loginPage'));

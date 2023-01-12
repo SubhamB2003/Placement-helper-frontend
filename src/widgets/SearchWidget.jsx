@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Typography, useTheme } from '@mui/material';
 import axios from 'axios';
-import React from 'react'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserImage from '../components/UserImage';
 
@@ -32,7 +30,7 @@ function SearchWidget({ query }) {
     }, [query]);
 
     return (
-        <Box sx={{ backgroundColor: neutralLight, width: "20vw" }} borderRadius="16px" maxHeight="40vh">
+        <Box sx={{ backgroundColor: neutralLight, width: "20vw", overflowY: "scroll" }} borderRadius="16px" maxHeight="40vh">
             {query !== "" && users.filter((user) => user.userName.toLowerCase().includes(query.toLowerCase())).map((user) => (
                 <Box display="flex" gap="1rem" padding={2} sx={{ cursor: "pointer" }} key={user._id}>
                     <UserImage image={user.picturePath} size={50} />
