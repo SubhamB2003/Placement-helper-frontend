@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { Box, Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
+import axios from "axios";
+import imageCompression from 'browser-image-compression';
 import { Formik } from 'formik';
-import * as yup from "yup";
-import { Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
+import React, { useState } from 'react';
+import Dropzone from "react-dropzone";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import imageCompression from 'browser-image-compression';
-import axios from "axios";
-import { Box } from '@mui/material';
-import Dropzone from "react-dropzone";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { setLogin } from "../../state/index";
+import * as yup from "yup";
 import Flexbetween from "../../components/Flexbetween";
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { setLogin } from "../../state/index";
 
 
 const loginSchema = yup.object().shape({

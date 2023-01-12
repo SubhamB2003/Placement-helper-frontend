@@ -1,5 +1,5 @@
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material'
-import React from 'react'
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import React from 'react';
 import Form from './Form';
 
 function AuthPage() {
